@@ -25,8 +25,13 @@ public class LegPartFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_leg_part, container, false);
 
-        ImageView imageView = (ImageView) rootView.findViewById(R.id.fragment_leg_view);
+        final ImageView imageView = (ImageView) rootView.findViewById(R.id.fragment_leg_view);
 
+        imageView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                imageView.setImageResource(AndroidImageAssets.getLegs().get(getRandom()));
+            }
+        });
         imageView.setImageResource(AndroidImageAssets.getLegs().get(getRandom()));
 
         return rootView;

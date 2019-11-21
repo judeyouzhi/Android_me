@@ -25,7 +25,13 @@ public class HeadPartFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_head_part, container, false);
 
-        ImageView imageView = (ImageView) rootView.findViewById(R.id.fragment_head_view);
+        final ImageView imageView = (ImageView) rootView.findViewById(R.id.fragment_head_view);
+
+        imageView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                imageView.setImageResource(AndroidImageAssets.getHeads().get(getRandom()));
+            }
+        });
 
         imageView.setImageResource(AndroidImageAssets.getHeads().get(getRandom()));
 

@@ -1,5 +1,7 @@
 package com.example.android.android_me.ui;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,11 +12,13 @@ import android.widget.ImageView;
 
 import com.example.android.android_me.R;
 import com.example.android.android_me.data.AndroidImageAssets;
+import com.example.android.android_me.data.SharedViewModel;
 
 import java.util.Random;
 
 public class BodyPartFragment extends Fragment {
 
+    private SharedViewModel model;
     public BodyPartFragment(){
 
     }
@@ -25,10 +29,19 @@ public class BodyPartFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_body_part, container, false);
 
-        ImageView imageView = (ImageView) rootView.findViewById(R.id.fragment_body_view);
+        final ImageView imageView = (ImageView) rootView.findViewById(R.id.fragment_body_view);
 
-        imageView.setImageResource(AndroidImageAssets.getBodies().get(getRandom()));
+        model = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
 
+        imageView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                int i = getRandom();
+                imageView.setImageResource(AndroidImageAssets.getBodies().get(i));
+                model.setBody(i);
+            }
+        });
+
+        imageView.setImageResource(AndroidImageAssets.getBodies().get(model.getBody()));
         return rootView;
 
     }
