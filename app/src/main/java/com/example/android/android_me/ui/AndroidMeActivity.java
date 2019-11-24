@@ -22,6 +22,8 @@ import android.os.Bundle;
 
 import com.example.android.android_me.R;
 
+import java.util.logging.Logger;
+
 // This activity will display a custom Android image composed of three body parts: head, body, and legs
 public class AndroidMeActivity extends AppCompatActivity {
 
@@ -33,7 +35,7 @@ public class AndroidMeActivity extends AppCompatActivity {
         // TODO (3) Show the first image in the list of head images
             // Soon, you'll update this image display code to show any image you want
 
-
+    Logger logger = Logger.getLogger("android me");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,5 +56,18 @@ public class AndroidMeActivity extends AppCompatActivity {
                 .add(R.id.leg_container, legPartFragment)
                 .commit();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        logger.warning("onDestroy");
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        logger.warning("finish");
     }
 }
